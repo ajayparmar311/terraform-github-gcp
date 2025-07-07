@@ -1,6 +1,5 @@
 secrets_and-keys
 .terraform.lock.hcl
 .terraform
-gcs-backend.tf
 terraform.tfstate
 terraform.tfstate.backup
