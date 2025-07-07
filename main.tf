@@ -33,5 +33,4 @@ output "topic_name" {
 
 output "topic_id" {
   value = google_pubsub_topic.example_topic.id
-
 }
