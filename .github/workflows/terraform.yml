@@ -56,3 +56,12 @@ jobs:
       run: terraform apply -auto-approve tfplan
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
+
+    - name: Slack Notification
+      if: always()
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_COLOR: ${{ job.status == 'success' && 'good' || 'danger' }}
+        SLACK_TITLE: "Terraform deployment ${{ job.status }}"
+        SLACK_MESSAGE: "Terraform run ${{ job.status }} for ${{ github.repository }}"
