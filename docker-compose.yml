@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  terraform:
+    image: hashicorp/terraform:latest
+    volumes:
+      - ./:/workspace
+    working_dir: /workspace
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/workspace/secrets_and-keys/my-kube-project-429018-47e6566c031a.json
+    entrypoint: ["/bin/sh", "-c"]
+    command: |
+      "
+      terraform init && \
+      terraform plan && \
+      terraform apply -auto-approve
+      "
