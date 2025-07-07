@@ -24,6 +24,5 @@ resource "google_pubsub_topic" "example_topic" {
   labels = {
     environment = "production"
     managed-by  = "terraform"
-    repo        = "github.com/terraform-github-gcp"
   }
 }
