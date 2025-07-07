@@ -7,10 +7,10 @@ terraform {
   }
 
   # Optional: Remote state in GCS (recommended)
-#  backend "gcs" {
-#    bucket = "your-tf-state-bucket"  # From TF_STATE_BUCKET secret
-#    prefix = "terraform/pubsub-state"
-#  }
+  backend "gcs" {
+    bucket = "terraform-state-bucket-31594"  # From TF_STATE_BUCKET secret
+    prefix = "terraform/pubsub-state"
+  }
 }
 
 provider "google" {
@@ -25,4 +25,12 @@ resource "google_pubsub_topic" "example_topic" {
     environment = "production"
     managed-by  = "terraform"
   }
+}
+
+output "topic_name" {
+  value = google_pubsub_topic.example_topic.name
+}
+
+output "topic_id" {
+  value = google_pubsub_topic.example_topic.id
 }
