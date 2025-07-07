@@ -14,3 +14,19 @@ variable "topic_name" {
   type        = string
   default     = "my-topic"
 }
+
+variable "bucket_name" {
+  description = "The name for the state bucket (must be globally unique)"
+  type        = string
+}
+
+variable "location" {
+  description = "The bucket location"
+  type        = string
+  default     = "US"
+}
+
+variable "service_account_email" {
+  description = "Email of the service account that will access the bucket"
+  type        = string
+}
