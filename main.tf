@@ -11,7 +11,7 @@ terraform {
 #    bucket = "your-tf-state-bucket"  # From TF_STATE_BUCKET secret
 #    prefix = "terraform/pubsub-state"
 #  }
-#}
+}
 
 provider "google" {
   project = var.project_id
