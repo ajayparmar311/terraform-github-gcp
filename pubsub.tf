@@ -64,7 +64,7 @@ resource "google_pubsub_subscription" "bigquery_sub" {
   bigquery_config {
     table = "${google_bigquery_table.metrics_table.project}.${google_bigquery_dataset.otel_metrics.dataset_id}.${google_bigquery_table.metrics_table.table_id}"
     use_topic_schema = false
-    write_metadata   = true
+    write_metadata   = false
   }
 
   ack_deadline_seconds = 20
