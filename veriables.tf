@@ -30,3 +30,8 @@ variable "service_account_email" {
   description = "Email of the service account that will access the bucket"
   type        = string
 }
+
+variable "otel-metrics-sa" {
+  type    = string
+  default = "otel-metrics-sa@my-kube-project-429018.iam.gserviceaccount.com"
+}
