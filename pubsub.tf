@@ -18,6 +18,7 @@ resource "google_bigquery_dataset" "otel_metrics" {
 resource "google_bigquery_table" "metrics_table" {
   dataset_id = google_bigquery_dataset.otel_metrics.dataset_id
   table_id   = "metrics_table"
+  deletion_protection = false
   project = var.project_id
   schema     = file("${path.module}/schemas/metrics_table_schema.json")
 
