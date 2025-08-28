@@ -20,7 +20,6 @@ resource "google_bigquery_dataset" "otel_metrics" {
     prevent_destroy = false
   }
 }
-}
 
 
 
