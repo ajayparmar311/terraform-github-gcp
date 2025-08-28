@@ -52,8 +52,8 @@ jobs:
       run: terraform show -no-color tfplan
 
     - name: Terraform Apply
-      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-      run: terraform apply -auto-approve tfplan
+      if: github.ref == 'refs/heads/master'
+      run: terraform  apply -auto-approve
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
 
