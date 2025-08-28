@@ -39,7 +39,7 @@ resource "google_project_iam_member" "dataflow_roles" {
   project = var.project_id
   role    = each.value
   member  = "serviceAccount:${google_service_account.dataflow_service_account.email}"
-  depends_on = [google_service_account.]
+  depends_on = [google_service_account.dataflow_service_account]
 }
 
 
