@@ -18,17 +18,17 @@ provider "google" {
   region  = var.region
 }
 
-#resource "google_pubsub_topic" "example_topic" {
-#  name = var.topic_name
-#  project = var.project_id
+resource "google_pubsub_topic" "example_topic" {
+  name = var.topic_name
+  project = var.project_id
   
-#  labels = {
-#    environment = "production"
-#    managed-by  = "terraform"
-#  }
-#}
+  labels = {
+    environment = "production"
+    managed-by  = "terraform"
+  }
+}
 
-#output "topic_name" {
+output "topic_name" {
   value = google_pubsub_topic.example_topic.name
 }
 
