@@ -1,3 +1,19 @@
+resource "google_pubsub_topic" "events_topic" {
+  name    = "events-topic"
+  labels  = var.labels
+}
+
+# Pub/Sub subscription for testing (optional)
+resource "google_pubsub_subscription" "events_subscription" {
+  name  = "events-subscription"
+  topic = google_pubsub_topic.events_topic.name
+  labels = var.labels
+
+  ack_deadline_seconds = 30
+  message_retention_duration = "604800s" # 7 days
+
+  depends_on = [google_pubsub_topic.events_topic]
+}
 
 
 # Create Pub/Sub Topic
@@ -91,6 +107,7 @@ EOF
   labels = var.labels
 
   deletion_protection = false
+  depends_on = [google_bigquery_dataset.otel_metrics]
 }
 
 
