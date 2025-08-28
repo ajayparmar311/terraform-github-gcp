@@ -35,3 +35,18 @@ variable "otel-metrics-sa" {
   type    = string
   default = "otel-metrics-sa@my-kube-project-429018.iam.gserviceaccount.com"
 }
+
+variable "table_id" {
+  description = "BigQuery table ID"
+  type        = string
+  default     = "application_events"
+}
+
+variable "labels" {
+  description = "Labels to apply to resources"
+  type        = map(string)
+  default     = {
+    environment = "deployment"
+    managed-by  = "terraform"
+  }
+}
