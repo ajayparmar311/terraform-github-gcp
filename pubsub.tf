@@ -117,3 +117,19 @@ resource "google_bigquery_dataset_iam_member" "dataflow_writer" {
   role       = "roles/bigquery.dataEditor"
   member     = "serviceAccount:${var.otel-metrics-sa}"
 }
+
+
+# Storage bucket for Dataflow temp files
+resource "google_storage_bucket" "dataflow_temp_bucket" {
+  name          = "${var.project_id}-dataflow-temp"
+  location      = var.region
+  force_destroy = true
+  labels        = var.labels
+
+  uniform_bucket_level_access = true
+
+  lifecycle {
+    prevent_destroy = false
+  }
+}
+
