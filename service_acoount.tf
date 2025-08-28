@@ -20,8 +20,8 @@ resource "google_project_iam_member" "bq_data_editor" {
 
 
 resource "google_service_account" "dataflow_service_account" {
-  account_id   = "dataflow_service_account"   # must be unique within the project
-  display_name = "dataflow_service_account"
+  account_id   = "dataflow-service-account"   # must be unique within the project
+  display_name = "dataflow-service-account"
   description  = "Service account for Terraform example"
 }
 
