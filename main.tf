@@ -11,8 +11,6 @@ terraform {
       version = "~> 5.0"
     }
   }
-}
-
   # Optional: Remote state in GCS (recommended)
   backend "gcs" {
     bucket = "terraform-state-bucket-31594"  # From TF_STATE_BUCKET secret
