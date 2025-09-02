@@ -112,9 +112,9 @@ EOF
 
 
 
-resource "google_bigquery_table" "otel_metrics" {
+resource "google_bigquery_table" "otel_metrics_table" {
   dataset_id = google_bigquery_dataset.otel_metrics.dataset_id
-  table_id   = "otel_metrics"
+  table_id   = "otel_metrics_table"
 
   schema = <<EOF
 [
@@ -151,26 +151,22 @@ resource "google_bigquery_table" "otel_metrics" {
   {
     "name": "insert_id",
     "type": "STRING",
-    "mode": "NULLABLE",
-    "description": "Unique insert ID for deduplication"
+    "mode": "NULLABLE"
   },
   {
     "name": "dummy1",
     "type": "STRING",
-    "mode": "NULLABLE",
-    "description": "futer attribute"
+    "mode": "NULLABLE"
   },
   {
     "name": "dummy2",
     "type": "STRING",
-    "mode": "NULLABLE",
-    "description": "futer attribute"
+    "mode": "NULLABLE"
   },
   {
     "name": "dummy3",
     "type": "STRING",
-    "mode": "NULLABLE",
-    "description": "futer attribute"
+    "mode": "NULLABLE"
   },
 ]
 EOF
@@ -185,7 +181,7 @@ EOF
   clustering = ["store_id", "metric_name"]
 
   labels = var.labels
-
+  deletion_protection = false
   depends_on = [google_bigquery_dataset.otel_metrics]
 }
 
