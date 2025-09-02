@@ -22,6 +22,18 @@ resource "google_pubsub_topic" "otel_metrics" {
   project = var.project_id
 }
 
+resource "google_pubsub_subscription" "otel_metrics_subscription" {
+  name  = "otel_metrics_subscription"
+  topic = google_pubsub_topic.otel_metrics.name
+  labels = var.labels
+
+  ack_deadline_seconds = 30
+  message_retention_duration = "604800s" # 7 days
+
+  depends_on = [google_pubsub_topic.otel_metrics]
+}
+
+
 # Create BigQuery Dataset
 resource "google_bigquery_dataset" "otel_metrics" {
   dataset_id = "otel_metrics"
