@@ -111,6 +111,88 @@ EOF
 }
 
 
+
+resource "google_bigquery_table" "otel_metrics" {
+  dataset_id = google_bigquery_dataset.otel_metrics.dataset_id
+  table_id   = "otel_metrics"
+
+  schema = <<EOF
+[
+  {
+    "name": "store_id",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "metric_name",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "timestamp",
+    "type": "INTEGER",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "value",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "attributes",
+    "type": "JSON",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "resource",
+    "type": "JSON",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "insert_id",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Unique insert ID for deduplication"
+  },
+  {
+    "name": "dummy1",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "futer attribute"
+  },
+  {
+    "name": "dummy2",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "futer attribute"
+  },
+  {
+    "name": "dummy3",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "futer attribute"
+  },
+]
+EOF
+
+  # Optional: Set partitioning (by timestamp in days)
+  time_partitioning {
+    type  = "DAY"
+    field = "timestamp"
+  }
+
+  # Optional: Set clustering for better query performance
+  clustering = ["store_id", "metric_name"]
+
+  labels = var.labels
+
+  depends_on = [google_bigquery_dataset.otel_metrics]
+}
+}
+
+
+
+
 # IAM role for Dataflow service account to write to BigQuery
 resource "google_bigquery_dataset_iam_member" "dataflow_writer" {
   dataset_id = google_bigquery_dataset.otel_metrics.dataset_id
