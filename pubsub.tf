@@ -188,7 +188,6 @@ EOF
 
   depends_on = [google_bigquery_dataset.otel_metrics]
 }
-}
 
 
 
