@@ -167,7 +167,7 @@ resource "google_bigquery_table" "otel_metrics_table" {
     "name": "dummy3",
     "type": "STRING",
     "mode": "NULLABLE"
-  },
+  }
 ]
 EOF
 
