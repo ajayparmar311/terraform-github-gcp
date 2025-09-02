@@ -130,7 +130,7 @@ resource "google_bigquery_table" "otel_metrics_table" {
   },
   {
     "name": "timestamp",
-    "type": "INTEGER",
+    "type": "TIMESTAMP",
     "mode": "REQUIRED"
   },
   {
