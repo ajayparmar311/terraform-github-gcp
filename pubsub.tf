@@ -138,7 +138,7 @@ resource "google_bigquery_table" "otel_metrics_table" {
   {
     "name": "metric_name",
     "type": "STRING",
-    "mode": "REQUIRED"
+    "mode": "NULLABLE"
   },
   {
     "name": "timestamp",
@@ -162,6 +162,26 @@ resource "google_bigquery_table" "otel_metrics_table" {
   },
   {
     "name": "insert_id",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "app_info",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "message_id",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "event",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "event_value",
     "type": "STRING",
     "mode": "NULLABLE"
   },
@@ -190,7 +210,7 @@ EOF
   }
 
   # Optional: Set clustering for better query performance
-  clustering = ["store_id", "metric_name"]
+  clustering = ["store_id"]
 
   labels = var.labels
   deletion_protection = false
