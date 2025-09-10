@@ -138,7 +138,7 @@ resource "google_bigquery_table" "otel_metrics_table" {
   {
     "name": "metric_name",
     "type": "STRING",
-    "mode": "NULLABLE"
+    "mode": "REQUIRED"
   },
   {
     "name": "timestamp",
@@ -230,13 +230,112 @@ EOF
   }
 
   # Optional: Set clustering for better query performance
-  clustering = ["store_id"]
+  clustering = ["store_id","metric_name"]
 
   labels = var.labels
   deletion_protection = false
   depends_on = [google_bigquery_dataset.otel_metrics]
 }
 
+
+
+resource "google_bigquery_table" "otel_logs_table" {
+  dataset_id = google_bigquery_dataset.otel_metrics.dataset_id
+  table_id   = "otel_logs_table"
+
+  schema = <<EOF
+[
+  {
+    "name": "store_id",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "timestamp",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "value",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "insert_id",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "app_info",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "message_id",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "event",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "event_value",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "cam_id",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "status",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "filter_type",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "health_check_of",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "dummy1",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "dummy2",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "dummy3",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  }
+]
+EOF
+
+  # Optional: Set partitioning (by timestamp in days)
+  time_partitioning {
+    type  = "DAY"
+    field = "timestamp"
+  }
+
+  # Optional: Set clustering for better query performance
+  clustering = ["store_id"]
+
+  labels = var.labels
+  deletion_protection = false
+  depends_on = [google_bigquery_dataset.otel_metrics]
+}
 
 
 
