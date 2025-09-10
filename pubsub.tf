@@ -186,6 +186,26 @@ resource "google_bigquery_table" "otel_metrics_table" {
     "mode": "NULLABLE"
   },
   {
+    "name": "cam_id",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "status",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "filter_type",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "health_check_of",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
     "name": "dummy1",
     "type": "STRING",
     "mode": "NULLABLE"
